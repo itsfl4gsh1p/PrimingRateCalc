@@ -1,30 +1,44 @@
-def vols_dextrose():
+# Justin A
+# @itFL4GSH1P
+
+def vols_dextrose(): #function to calculate volumes based on dextrose.
 	conv = ((dvolumes - saturation) / .27027)
-	final = ((conv * .1335) * 5)
+	final = ((conv * .1335) * batch_size)
 	print round(final, 2), "ounces of sugar per 5gal batch of beer."
 
-def vols_sucrose():
+def vols_sucrose(): #function to calculate volumes based on surcose
 	conv = ((dvolumes - saturation) / .286)
-	final = ((conv * .1335) * 5)
+	final = ((conv * .1335) * batch_size)
 	print round(final, 2), "ounces of sugar per 5gal batch of beer."
 
+# variable explanation to define above.
+# conv = Is the pitching rate in g/L (grams per liter)
+# dvolumes = Desired CO2 volumes level as chosen below
+# saturation = Volumes of CO2 present in beer which has been fermented and is at @ specific temp
+# final =  converts the entire formula from g/L to o/G (ounces per gallon)
 
-print "Welcome to my custom CO2 volumes calculator."
-print "This is not an 'exact' calculation as it is based on a table set of information."
-print "It should be plenty accurate enough for general use."
-print "This calculation currently is only for dextrose (corn sugar) & sucrose (table sugar/brown sugar)"
-print "Let's get started."
-print "==============================================="
+
+print "===================================================================================================="
+print "| Welcome to my custom CO2 volumes calculator.                                                     |"
+print "| This is not an 'exact' calculation as it is based on a table set of information.                 |"
+print "| It should be plenty accurate enough for general use.                                             |"
+print "| This calculation currently is only for dextrose (corn sugar) & sucrose (table sugar/brown sugar) |"
+print "| That being said, let's get started.                                                              |"
+print "===================================================================================================="
+
+print "Please note this will exept decimal numbers to indicate very small test batch sizes (ie. 1/2gl would be entered as .5)"
+batch_size = float(raw_input("Please choose your batch size in gallons: "))
+
 
 print "1. Dextrose (corn sugar)"
 print "2. Sucrose (table sugar/brown sugar)"
-print "Please choose your sugar type:"
+sugar = int(raw_input("Please choose your sugar type: ")) #allows user to make a simple menu choice
 
 
-sugar = int(raw_input( ))
+degrees = int(raw_input("Please enter the temperature of your beer in *F: ")) #easy enough. accepts a temperature in degrees F.
 
-degrees = int(raw_input("Please enter the temperature of your beer in *F:"))
-
+#the following lines turn a conversion table into a big mess of if statements. The orginal table was based on celsius and had to be converted to F.
+#there must be a better way to do this but for now this is functional
 if 32 <= degrees <= 34:
 	saturation = 1.70
 elif 35 <= degrees <= 38:
@@ -50,6 +64,9 @@ elif 68 <= degrees <= 70:
 elif 71 <= degrees <= 74:
 	saturation = .83
 
+# table was formulated from 2 sources:
+# 1. http://hdb.org/ddraper/priming.html
+# 2. http://howtobrew.com
 print "-------------------------------------------"
 print "|     Volumes of CO2 in common styles     |"
 print "|=========================================|"
@@ -66,8 +83,9 @@ print "|Fruit lambic                      3.0-4.5|"
 print "|German wheat beer                 3.3-4.5|"
 print "-------------------------------------------"
 
-dvolumes = float(raw_input("Please enter desired CO2 volumes:"))
+dvolumes = float(raw_input("Please enter desired CO2 volumes: ")) # accepts desired Volumes as floating point number
 
+# choice of sugar defined above
 if sugar == 1:
 	vols_dextrose()
 elif sugar == 2:
